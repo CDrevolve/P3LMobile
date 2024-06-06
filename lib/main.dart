@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p3lmobile/landing_page.dart';
 import 'login_page.dart'; // Import halaman login yang telah dibuat sebelumnya
 
 void main() {
@@ -11,7 +12,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(), // Mengatur halaman login sebagai halaman utama
+      home: LandingPage(), // Mengatur halaman login sebagai halaman utama
     );
   }
 }

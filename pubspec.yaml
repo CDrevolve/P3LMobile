@@ -1,20 +1,29 @@
 name: p3lmobile
 description: A new Flutter project.
-publish_to: 'none'
+publish_to: "none"
 version: 0.1.0
 
 environment:
-  sdk: '>=3.1.0 <4.0.0'
+  sdk: ">=3.1.0 <4.0.0"
 
 dependencies:
   flutter:
     sdk: flutter
-  http: ^1.2.1
+  http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   flutter_lints: ^2.0.0
+  carousel_slider: ^4.0.0
 
 flutter:
+  assets:
+    - lib/images/Lapis_Legit.jpg
+    - lib/images/lapislegit.jpeg
+    - lib/images/Lapis_Surabaya.jpg
+    - lib/images/Mandarin.jpg
+    - lib/images/Mandarin2.jpg
+    - lib/images/Spikoe.jpg
+
   uses-material-design: true
