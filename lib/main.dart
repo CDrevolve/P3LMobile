@@ -1,8 +1,13 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import halaman login yang telah dibuat sebelumnya
+
+import 'package:p3lmobile/client/karyawan_client.dart';
+import 'package:p3lmobile/client/presensi_client.dart';
+import 'package:p3lmobile/model/karyawan.dart';
+import 'package:p3lmobile/model/presensi.dart';
+import 'login_page.dart'; 
 
 void main() {
-  runApp(const MainApp());
+  runApp(PresensiApp());
 }
 
 class MainApp extends StatelessWidget {
@@ -11,7 +16,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(), // Mengatur halaman login sebagai halaman utama
+      home: LoginPage(),
     );
   }
 }

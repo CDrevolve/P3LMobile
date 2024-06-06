@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:p3lmobile/models/karyawan.dart';
+import 'package:p3lmobile/model/karyawan.dart';
+
 
 class KaryawanClient{
   static final String url = '10.0.2.2:8000';
@@ -30,9 +31,8 @@ static Future<List<Karyawan>> fetchAll() async {
     var response = await get(Uri.http(url, endpoint));
     if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
-    List<dynamic> jsonArray = json.decode(response.body)['karyawan']; // Mengurai respons menjadi list<dynamic>
+    List<dynamic> jsonArray = json.decode(response.body)['karyawan']; 
 
-    // Membuat objek Karyawan dari setiap elemen dalam larik JSON
     List<Karyawan> karyawanList = [];
     jsonArray.forEach((karyawanJson) {
       karyawanList.add(Karyawan.fromJson(karyawanJson));

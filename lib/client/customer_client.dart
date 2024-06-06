@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:p3lmobile/models/customer.dart';
+import 'package:p3lmobile/model/customer.dart';
 
 class CustomerClient{
   static final String url = '10.0.2.2:8000';
@@ -32,7 +32,6 @@ static Future<List<Customer>> fetchAll() async {
 
     List<dynamic> jsonArray = json.decode(response.body)['customer']; // Mengurai respons menjadi list<dynamic>
 
-    // Membuat objek Karyawan dari setiap elemen dalam larik JSON
     List<Customer> customerList = [];
     jsonArray.forEach((customerJson) {
       customerList.add(Customer.fromJson(customerJson));

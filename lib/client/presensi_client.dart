@@ -1,6 +1,6 @@
 import 'dart:convert';
 import 'package:http/http.dart';
-import 'package:p3lmobile/models/presensi.dart';
+import 'package:p3lmobile/model/presensi.dart';
 
 class PresensiClient {
   static final String url = '10.0.2.2:8000';
