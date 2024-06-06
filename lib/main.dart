@@ -7,7 +7,7 @@ import 'package:p3lmobile/model/presensi.dart';
 import 'login_page.dart'; 
 
 void main() {
-  runApp(PresensiApp());
+  runApp(const MainApp());
 }
 
 class MainApp extends StatelessWidget {

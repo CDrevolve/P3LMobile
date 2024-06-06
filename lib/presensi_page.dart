@@ -3,8 +3,8 @@ import 'package:p3lmobile/api/api.dart';
 import 'package:p3lmobile/client/karyawan_client.dart';
 import 'package:p3lmobile/client/presensi_client.dart';
 import 'package:p3lmobile/login_page.dart';
-import 'package:p3lmobile/models/karyawan.dart';
-import 'package:p3lmobile/models/presensi.dart';
+import 'package:p3lmobile/model/karyawan.dart';
+import 'package:p3lmobile/model/presensi.dart';
 
 class PresensiPage extends StatefulWidget {
   @override
