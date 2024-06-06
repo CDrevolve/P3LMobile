@@ -32,7 +32,6 @@ static Future<List<Customer>> fetchAll() async {
 
     List<dynamic> jsonArray = json.decode(response.body)['customer']; // Mengurai respons menjadi list<dynamic>
 
-    // Membuat objek Karyawan dari setiap elemen dalam larik JSON
     List<Customer> customerList = [];
     jsonArray.forEach((customerJson) {
       customerList.add(Customer.fromJson(customerJson));
