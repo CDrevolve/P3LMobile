@@ -1,47 +1,43 @@
-
 class Customer {
-  int id_customer;
-  int id_user;
+  int idCustomer;
+  int idUser;
   String nama;
-  DateTime tanggal_lahir;
-  String saldo;
-  String no_telp;
-  String poin;
+  DateTime tanggalLahir;
+  String noTelp;
+  int poin;
+  double saldo;
 
+  Customer({
+    required this.idCustomer,
+    required this.idUser,
+    required this.nama,
+    required this.tanggalLahir,
+    required this.noTelp,
+    required this.poin,
+    required this.saldo,
+  });
 
-Customer(
-    {
-      required this.id_customer,
-      required this.id_user,
-      required this.nama,
-      required this.tanggal_lahir,
-      required this.no_telp,
-      required this.poin,
-      required this.saldo,
-    }
-  );
-
-  factory Customer.fromJson(Map<String,dynamic>json){
+  factory Customer.fromJson(Map<String, dynamic> json) {
     return Customer(
-      id_customer: json['id'],
-      id_user: json['id_user'],
+      idCustomer: json['id'],
+      idUser: json['id_user'],
       nama: json['nama'],
-      tanggal_lahir: json['tanggal_lahir'],
-      no_telp: json['no_telp'],
+      tanggalLahir: DateTime.parse(json['tanggal_lahir']),
+      noTelp: json['no_telp'],
       poin: json['poin'],
-      saldo: json['saldo'],
+      saldo: json['saldo'].toDouble(),
     );
   }
 
-  Map<String,dynamic> toJson(){
-    return{
-      'id' : id_customer,
-      'id_user' : id_user,
-      'nama' : nama,
-      'tanggal_lahir' : tanggal_lahir,
-      'no_telp' : no_telp,
-      'poin' : poin,
-      'saldo' : saldo,
+  Map<String, dynamic> toJson() {
+    return {
+      'id': idCustomer,
+      'id_user': idUser,
+      'nama': nama,
+      'tanggal_lahir': tanggalLahir.toIso8601String(),
+      'no_telp': noTelp,
+      'poin': poin,
+      'saldo': saldo,
     };
   }
 }
