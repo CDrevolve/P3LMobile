@@ -1,46 +1,46 @@
+// lib/client/pemesanan_client.dart
+
 import 'dart:convert';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:p3lmobile/model/pemesanan.dart';
 
-class PemesananClient{
-  static final String url = '10.0.2.2:8000';
-  static final String endpoint = '/pesananMobile';
+class PemesananClient {
+  static final String baseUrl = '10.0.2.2:8000';
+  static final String endpoint = '/api/pesananMobile';
 
- Client client;
+  final http.Client client;
 
- PemesananClient(this.client);
+  PemesananClient(this.client);
 
- static Future<List<Pemesanan>> fetchAllMock(Client client) async {
-  try{
-    var response = await client.get(
-      Uri.http(url, endpoint),
-    );
+  Future<List<Pemesanan>> fetchAll() async {
+    try {
+      var response = await client.get(Uri.http(baseUrl, endpoint), headers: {
+        'Authorization': 'Bearer YOUR_API_TOKEN'
+      });
 
-    if(response.statusCode != 200) throw Exception(response.reasonPhrase);
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
-    Iterable list = json.decode(response.body)['pemesanan'];
-
-    return list.map((e) => Pemesanan.fromJson(e)).toList();
-  } catch(e){
-    return Future.error(e.toString());
+      List<dynamic> jsonArray = json.decode(response.body)['pemesanan'];
+      return jsonArray.map((json) => Pemesanan.fromJson(json)).toList();
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
- }
-static Future<List<Pemesanan>> fetchAll() async {
-  try {
-    var response = await get(Uri.http(url, endpoint));
-    if (response.statusCode != 200) throw Exception(response.reasonPhrase);
 
-    List<dynamic> jsonArray = json.decode(response.body)['pemesanan']; // Mengurai respons menjadi list<dynamic>
+  Future<void> updateStatus(int id) async {
+    try {
+      var response = await client.put(
+        Uri.http(baseUrl, '$endpoint/$id'),
+        headers: {
+          'Authorization': 'Bearer YOUR_API_TOKEN',
+          'Content-Type': 'application/json'
+        },
+        body: json.encode({'status': 'Selesai'}),
+      );
 
-    // Membuat objek Karyawan dari setiap elemen dalam larik JSON
-    List<Pemesanan> pemesananList = [];
-    jsonArray.forEach((pemesananJson) {
-      pemesananList.add(Pemesanan.fromJson(pemesananJson));
-    });
-
-    return pemesananList;
-  } catch (e){
-    return Future.error(e.toString());
+      if (response.statusCode != 200) throw Exception(response.reasonPhrase);
+    } catch (e) {
+      return Future.error(e.toString());
+    }
   }
-}
 }
