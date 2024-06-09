@@ -5,7 +5,7 @@ import 'package:p3lmobile/model/karyawan.dart';
 import 'package:p3lmobile/model/presensi.dart';
 import 'login_page.dart'; 
 import 'package:p3lmobile/landing_page.dart';
-import 'login_page.dart'; // Import halaman login yang telah dibuat sebelumnya
+import 'login_page.dart'; 
 
 
 void main() {

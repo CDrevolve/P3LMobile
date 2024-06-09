@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:p3lmobile/api/api.dart';
-import 'package:p3lmobile/forget_page.dart';
 import 'package:p3lmobile/models/customer.dart';
 import 'package:p3lmobile/presensi_page.dart';
 import 'package:p3lmobile/customer_page.dart';
+
 
 class LoginPage extends StatefulWidget {
   @override
@@ -109,17 +109,6 @@ class _LoginPageState extends State<LoginPage> {
                 _errorMessage,
                 style: TextStyle(color: Colors.red),
               ),
-            SizedBox(height: 8.0),
-            TextButton(
-              onPressed: () {
-                // Navigate to the forget password screen
-                // For example:
-                // Navigator.pushNamed(context, '/forget-password');
-                Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => forgetPage()));
-              },
-              child: Text('Forget password?'),
-            ),
           ],
         ),
       ),
