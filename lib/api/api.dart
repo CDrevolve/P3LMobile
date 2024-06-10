@@ -4,8 +4,10 @@ import 'package:http/http.dart' as http;
 import 'package:p3lmobile/models/user.dart';
 
 class UserClient {
-  static final String baseUrl = 'http://10.0.2.2:8000'; // base url untuk emulator
+  static final String baseUrl =
+      'http://10.0.2.2:8000'; // base url untuk emulator
   static final String endpoint = 'api/loginMobile'; // base endpoint
+  static String? token;
 
   static Future<List<User>> fetchAll() async {
     try {
@@ -51,6 +53,4 @@ class UserClient {
       throw Exception(e.toString());
     }
   }
-  
-
 }

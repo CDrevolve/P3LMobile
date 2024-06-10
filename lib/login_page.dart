@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:p3lmobile/api/api.dart';
 import 'package:p3lmobile/models/customer.dart';
+import 'package:p3lmobile/Customer/navbar.dart';
 import 'package:p3lmobile/presensi_page.dart';
 import 'package:p3lmobile/customer_page.dart';
-
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -13,6 +14,21 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  late SharedPreferences _prefs;
+  @override
+  void initState() {
+    super.initState();
+    _initSharedPreferences();
+  }
+
+  Future<void> _initSharedPreferences() async {
+    _prefs = await SharedPreferences.getInstance();
+  }
+
+  Future<void> _saveLoginStatus(String? token) async {
+    await _prefs.setString('token', token!);
+  }
 
   bool _isLoading = false;
   String _errorMessage = '';
@@ -28,18 +44,25 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final user = await UserClient.login(email, password);
+      await _saveLoginStatus(user?.token);
+
       if (user != null) {
         switch (user.idRole) {
           case 3:
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => PresensiPage()));
-            print('Login successful as ${user.username}. Navigating to PresensiPage.');
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => PresensiPage()));
+            print(
+                'Login successful as ${user.username}. Navigating to PresensiPage.');
             break;
-            case 5:
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductListScreen()));
-            print('Login successful as ${user.username}. Navigating to PresensiPage.');
+          case 5:
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) => BottomNavbarScreen()));
+            print(
+                'Login successful as ${user.username}. Navigating to PresensiPage.');
             break;
           default:
-            print('Login successful as ${user.username}. Navigating to default page.');
+            print(
+                'Login successful as ${user.username}. Navigating to default page.');
             break;
         }
       } else {
@@ -53,7 +76,7 @@ class _LoginPageState extends State<LoginPage> {
       });
     } catch (e) {
       setState(() {
-        _errorMessage = 'Login failed. Unknown error occurred.';
+        _errorMessage = 'Login failed. ${e.toString()}';
       });
     } finally {
       setState(() {
@@ -66,7 +89,8 @@ class _LoginPageState extends State<LoginPage> {
     // Lakukan logika logout di sini
     // Contoh: Hapus token, reset state, dan navigasi ke halaman login
     // Misalnya:
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LoginPage()));
+    Navigator.pushReplacement(
+        context, MaterialPageRoute(builder: (context) => LoginPage()));
     print('Logout successful');
   }
 
@@ -75,7 +99,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text('ATMA'),
-        
       ),
       body: Padding(
         padding: EdgeInsets.all(16.0),
