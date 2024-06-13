@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
             break;
             case 5:
             Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => ProductListScreen()));
-            print('Login successful as ${user.username}. Navigating to PresensiPage.');
+            print('Login successful as ${user.username}. Navigating to ProducListPage.');
             break;
           default:
             print('Login successful as ${user.username}. Navigating to default page.');

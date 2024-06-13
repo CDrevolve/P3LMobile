@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:p3lmobile/client/ProductApiClient.dart';
 
@@ -50,11 +49,4 @@ class _ProductListScreenState extends State<ProductListScreen> {
       ),
     );
   }
-}
-
-// Main function
-void main() {
-  runApp(MaterialApp(
-    home: ProductListScreen(),
-  ));
 }

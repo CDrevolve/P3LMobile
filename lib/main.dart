@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'login_page.dart'; // Import halaman login yang telah dibuat sebelumnya
+import 'package:p3lmobile/bahan_baku.dart';
+import 'login_page.dart';
+import 'customer_page.dart'; // Import halaman login yang telah dibuat sebelumnya
 
 void main() {
   runApp(const MainApp());
@@ -11,7 +13,7 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: LoginPage(), // Mengatur halaman login sebagai halaman utama
+      home:  BahanBakuScreen() // Mengatur halaman login sebagai halaman utama
     );
   }
 }
