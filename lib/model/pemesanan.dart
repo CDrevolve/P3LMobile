@@ -5,14 +5,14 @@ class Pemesanan {
   int id_alamat;
   String nama;
   String isi;
-  double harga;
+  int harga;
   String status;
   String pickup;
   DateTime tanggal;
   int jarak;
-  double ongkir;
-  double jumlah_pembayaran;
-  double tips;
+  int ongkir;
+  int jumlah_pembayaran;
+  int tips;
   String bukti_pembayaran;
 
   Pemesanan({

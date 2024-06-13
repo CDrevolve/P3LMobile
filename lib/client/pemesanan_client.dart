@@ -3,8 +3,8 @@ import 'package:http/http.dart' as http;
 import 'package:p3lmobile/model/pemesanan.dart';
 
 class PemesananClient {
-  static final String baseUrl = 'http://10.0.2.2:8000'; // base URL for emulator
-  static final String endpoint = 'api/pesanannMobile'; // base endpoint for orders
+  static final String baseUrl = 'http://10.0.2.2:8000'; 
+  static final String endpoint = 'api/pesanannMobile'; 
 
   // Fetch all orders for the authenticated user
   static Future<List<Pemesanan>> fetchAll(String token) async {
@@ -25,6 +25,11 @@ class PemesananClient {
       // Check if the response is JSON
       if (!isJson(response.body)) {
         throw Exception('Invalid JSON response');
+      }
+
+      // Check if the response contains the expected key
+      if (!json.decode(response.body).containsKey('pemesanan')) {
+        throw Exception('Response does not contain expected key');
       }
 
       Iterable list = json.decode(response.body)['pemesanan'];
@@ -53,6 +58,11 @@ class PemesananClient {
         // Check if the response is JSON
         if (!isJson(response.body)) {
           throw Exception('Invalid JSON response');
+        }
+
+        // Check if the response contains the expected key
+        if (!json.decode(response.body).containsKey('pemesanan')) {
+          throw Exception('Response does not contain expected key');
         }
 
         return Pemesanan.fromJson(json.decode(response.body)['pemesanan']);

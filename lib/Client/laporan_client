@@ -1,0 +1,39 @@
+import 'dart:convert';
+import 'package:http/http.dart' as http;
+import 'package:p3lmobile/model/pemesanan.dart';
+
+class LaporanClient {
+  static final String baseUrl = 'http://10.0.2.2:8000'; // base URL for emulator
+  static final String endpoint = 'api/laporan-penjualan-tahunan';
+
+  Future<List<dynamic>> fetchPenjualanTahunan(int tahun) async {
+    final response = await http.get(Uri.parse('$baseUrl/laporan-penjualan-tahunan?tahun=$tahun'));
+    
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> responseData = jsonDecode(response.body);
+      if (responseData.containsKey('penjualanBulanan')) {
+        return responseData['penjualanBulanan'];
+      } else {
+        throw Exception('Key "penjualanBulanan" not found in response');
+      }
+    } else {
+      throw Exception('Failed to load data');
+    }
+  }
+
+  Future<void> downloadPDF(int tahun) async {
+    final response = await http.get(Uri.parse('$baseUrl/download-pdf?tahun=$tahun'));
+    
+    print('Response status: ${response.statusCode}');
+    print('Response body: ${response.body}');
+    
+    if (response.statusCode == 200) {
+      // Handle successful PDF download here
+    } else {
+      throw Exception('Failed to download PDF');
+    }
+  }
+}
