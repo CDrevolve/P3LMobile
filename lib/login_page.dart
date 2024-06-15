@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:p3lmobile/MO/tanggalLaporan.dart';
 import 'package:p3lmobile/api/api.dart';
 import 'package:p3lmobile/models/customer.dart';
 import 'package:p3lmobile/Customer/navbar.dart';
@@ -26,8 +27,9 @@ class _LoginPageState extends State<LoginPage> {
     _prefs = await SharedPreferences.getInstance();
   }
 
-  Future<void> _saveLoginStatus(String? token) async {
+  Future<void> _saveLoginStatus(String? token, int idRole) async {
     await _prefs.setString('token', token!);
+    await _prefs.setInt('idRole', idRole);
   }
 
   bool _isLoading = false;
@@ -44,13 +46,15 @@ class _LoginPageState extends State<LoginPage> {
 
     try {
       final user = await UserClient.login(email, password);
-      await _saveLoginStatus(user?.token);
+      await _saveLoginStatus(user?.token, user?.idRole ?? 0);
 
       if (user != null) {
         switch (user.idRole) {
           case 3:
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) => PresensiPage()));
+            Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => TanggalLaporanScreen()));
             print(
                 'Login successful as ${user.username}. Navigating to PresensiPage.');
             break;

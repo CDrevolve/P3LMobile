@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:p3lmobile/Client/tariksaldo_client.dart';
 import 'package:p3lmobile/Customer/HistoryPenarikan.dart';
+import 'package:p3lmobile/MO/tanggalLaporan.dart';
 import 'package:p3lmobile/landing_page.dart';
 import 'package:p3lmobile/login_page.dart';
 import 'package:p3lmobile/model/customer.dart';
@@ -17,6 +18,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   late SharedPreferences prefs;
   String token = '';
+  int idRole = 0;
   Customer? customer;
   bool _isLoading = true;
 
@@ -40,6 +42,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
     prefs = await SharedPreferences.getInstance();
     setState(() {
       token = prefs.getString('token')!;
+      idRole = prefs.getInt('idRole')!;
       _isLoading = true;
     });
     refresh();
@@ -106,6 +109,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     child: const Text('History Penarikan Saldo'),
                   ),
                 ),
+                if (idRole == 3)
+                  Center(
+                    child: ElevatedButton(
+                      onPressed: () async {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => TanggalLaporanScreen(),
+                          ),
+                        );
+                      },
+                      child: const Text('Laporan Pemasukan Pengeluaran'),
+                    ),
+                  ),
                 Center(
                   child: ElevatedButton(
                     style: ElevatedButton.styleFrom(primary: Colors.red),
@@ -121,7 +138,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     },
                     child: const Text('Logout'),
                   ),
-                )
+                ),
               ],
             ),
     );

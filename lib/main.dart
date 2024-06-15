@@ -13,14 +13,17 @@ void main() async {
   SharedPreferences prefs = await SharedPreferences.getInstance();
 
   var token = prefs.getString("token");
+  var idRole = prefs.getInt("idRole");
   runApp(MainApp(
     token: token,
+    idRole: idRole,
   ));
 }
 
 class MainApp extends StatelessWidget {
-  const MainApp({Key? key, this.token}) : super(key: key);
+  const MainApp({Key? key, this.token, this.idRole}) : super(key: key);
   final String? token;
+  final int? idRole;
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
